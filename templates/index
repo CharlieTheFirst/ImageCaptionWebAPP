@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Image caption Prediction</title>
+	
+	<link href="style.css" rel="stylesheet">
+<style>
+
+.heading{
+	font-weight: 150;
+	font-size: 4em;
+	text-shadow: 1px 1px 5px black;
+}	
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("4880206.jpg");
+
+}
+
+.text{
+	font-size: 32px;
+	font-style: italic;
+}
+
+html {
+  overflow-x: scroll;
+}
+
+
+.navbar {
+  top: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #4696E5;
+  width: 100%;
+  height: 80px;
+  z-index: 10;
+}
+
+.logo {
+  flex: 1 1 auto;
+  margin-left: 40px;
+  margin-top: 22px;
+  letter-spacing: 0.5px;
+  font-size: 34px;
+  font-family: "bahnschrift";
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  z-index: 9;
+  
+}
+
+.two-columns-container  {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5em;
+  padding-bottom: 2em;
+  width: 100%;
+  background-color: var(--metal_blue);
+}
+
+.even-column  {
+  flex: 50%;
+}
+
+.even-column-config-1 > h1 {
+  font-family: "Tw Cen MT";
+  margin-left: 15%;
+  font-size: 70px;
+  font-weight: bold;
+  color: black;
+}
+
+.even-column-config-1 > p {
+  border-radius: 25px;
+  background-color: lightgrey;
+  
+
+  padding: 30px;
+  margin: 30px;
+
+  margin-left: 15%;
+  margin-right: 15%;
+  padding-top: 1em;
+  font-family: "HP Simplified Hans";
+  font-size: 26px;
+  font-weight: normal;
+  color: black;
+}
+
+.button-cute {
+    background-color: #4696E5;
+    color: white;
+    font-family: "HP Simplified Hans";
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    padding: 0.6em 1.75em 0.6em 1.75em;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    border: none;
+    cursor: pointer;
+}
+
+input {
+  font-family: "HP Simplified Hans";
+  font-size: 18px;
+	font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+img {
+	width: 55%;
+    height: 55%;
+    object-fit: contain;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+}
+
+.imgtext{
+  font-family: "Arial";
+	font-size: 22px;
+	text-align: center;
+	letter-spacing: 1px;
+    text-decoration: none;
+    display: block;
+    border: none;
+}
+
+.even-column-config-2 > h1 {
+  font-family: "Tw Cen MT";
+  padding-bottom: 1em;
+  margin-left: 10%;
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+}
+
+.even-column-config-2 > p {
+  border-radius: 25px;
+  background-color: lightgrey;
+  width: 750px;
+
+  padding: 30px;
+  margin: 30px;
+
+  margin-left: 10%;
+  margin-right: 15%;
+  padding-top: 1em;
+  font-family: "HP Simplified Hans";
+  font-size: 22px;
+  font-weight: normal;
+  color: black;
+}
+</head>
+</style>
+    <body>
+        <div class="navbar">
+            <!-- Top left icon -->
+              <a href="index.html" style="text-decoration: none;">
+                <h1 class="logo">Image Captioning</h1>
+              </a>
+        </div>
+
+        <div class="two-columns-container" style="padding-top: 4em;">
+		
+		
+            <div class="even-column even-column-config-1">
+                <h1>Greetings</h1>
+                <p>This is a image captioning project.
+                <br><br>Upload your image for generate caption.
+                <div style="margin-left: 15%; margin-top: 1em;">
+
+					<form class = "form-inline" method="POST" action="/" enctype="multipart/form-data">
+					<label><b>Image : &nbsp;&nbsp; </b></label>
+					<input  class="form-control" type="file" name="userfile" placeholder="upload image">
+					<br>
+					<br>
+					<button type="submit" class="button-cute">Submit</button>
+					</p>
+					</form>
+				</div>
+			</div>
+
+            <div class="even-column" >
+              {% if your_result %}
+                <img src="{{your_result['image']}}" style="margin-top: 100px;">
+                <p class="imgtext"> Caption to this image: <b> {{your_result["caption"]}} </b> </p>
+              {% endif %}
+            </div>
+		</div>
+
+
+
+
+
+        <div class="two-columns-container" style="padding-top: 2em;">
+          <div class="even-column even-column-config-2">
+            <h1>What is image captioning?</h1>
+            <p>The image caption system is a prediction program that uses a network
+            architecture by using Long Short-Term Memory (LSTM) for model creation. The
+            relationship between each image, specifying the object in the image as a separate
+            object to compare with the caption, and remembering context and action from the
+            caption list to generate captions.
+          </div>
+  
+          <div class="even-column">
+            <div style="margin-left: 15%; margin-top: 7em;"></div>
+              <img src="/static/img/2_dog_playing.jpg" style="width:555px;height:318px;border:5px solid #555;">
+          </div>
+        </div>
+
+        <div class="two-columns-container" style="padding-top: 2em;">
+          <div class="even-column even-column-config-2">
+            <h1>We use Flickr8k dataset to train AI for image captioning.</h1>
+            <p>A new benchmark collection for sentence-based image description and search, 
+            consisting of 8,000 images that are each paired with five different captions which 
+            provide clear descriptions of the salient entities and events.
+            The images were chosen from six different Flickr groups, 
+            and tend not to contain any well-known people or locations, 
+            but were manually selected to depict a variety of scenes and situations
+          </div>
+
+          <div class="even-column">
+            <div style="margin-left: 15%; margin-top: 7em;"></div>
+              <img src="/static/img/pic1.jpg" style="width:500px;height:250px;">
+              <img src="/static/img/pic2.jpg" style="width:500px;height:250px;">
+          </div>
+        </div>
+        
+    </body>
+</html>
